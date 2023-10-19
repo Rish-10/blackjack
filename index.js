@@ -135,7 +135,7 @@ function renderGame() {
         } else {
             survived = false
             for (let i = 0; i < cards.length; i++) {
-                if (cards[i] === 1 && aceAdapt[i] == false) {
+                if (cards[i] === 1 && aceAdapt[i] == false && sum > 21) {
                     sum = sum - 10
                     survived = true
                     aceAdapt[i] = true
@@ -194,7 +194,7 @@ function renderGame() {
         } else {
             dealerSurvived = false
             for (let i = 0; i < dealerCards.length; i++) {
-                if (dealerCards[i] === 1 && dealerAceAdapt[i] == false) {
+                if (dealerCards[i] === 1 && dealerAceAdapt[i] == false && dealerSum > 21) {
                     dealerSum = dealerSum - 10
                     dealerSurvived = true
                     dealerAceAdapt[i] = true
