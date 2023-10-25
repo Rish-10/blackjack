@@ -111,7 +111,6 @@ function resetGame() {
 
 
 function renderGame() {
-    sumEl.textContent = `Sum: ${sum}`
     if (stand === false && endGame === false) {
         for (let i = 0; i < cards.length; i++) {
             if (displayed[i] === false) {
@@ -130,7 +129,7 @@ function renderGame() {
         if (sum <= 20) {
             message = "HIT or STAND?"
         } else if (sum === 21) {
-            messageEl.className = ""
+            messageEl.className = "won"
             message = "You've got Blackjack!"
             hasBlackJack = true
             endGame = true 
@@ -147,6 +146,7 @@ function renderGame() {
             if (survived === false) {
                 messageEl.className = ""
                 message = "Busted! Try again:"
+                messageEl.className = "lost"
                 isAlive = false
                 endGame = true
                 playerLoses()
@@ -178,16 +178,19 @@ function renderGame() {
             dealerHasBlackJack = true
             messageEl.className = ""
             message = "Unlucky, Dealer got Blackjack! Try again:"
+            messageEl.className = "lost"
             endGame = true 
             playerLoses()
         } else if (dealerSum > sum && dealerSum <= 21) {
             messageEl.className = ""
             message = "Dealer Wins! Try again:"
+            messageEl.className = "lost"
             endGame = true
             playerLoses()
         } else if (dealerSum === sum) {
             messageEl.className = ""
             message = "House Wins. Try again:"
+            messageEl.className = "lost"
             endGame = true
             playerLoses()
         } else if (dealerSum < 21 && dealerSum < sum && dealerCards.length < 5){
@@ -206,6 +209,7 @@ function renderGame() {
             if (dealerSurvived === false) {
                 messageEl.className = ""
                 message = "You win! Dealer busted!"
+                messageEl.className = "won"
                 dealerIsAlive = false
                 endGame = true
                 playerWins()
@@ -217,12 +221,14 @@ function renderGame() {
             } else {
                 messageEl.className = ""
                 message = "You win!"
+                messageEl.className = "won"
                 dealerIsAlive = false
                 endGame = true
                 playerWins()
             }
         }
     }
+    sumEl.textContent = `${sum}`
     messageEl.textContent = message 
 }
 

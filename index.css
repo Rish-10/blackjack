@@ -96,7 +96,26 @@ button {
     margin-bottom: 50px;
 }
 
-#current-stake-el, #sum-el {
+#current-stake-el {
     margin-top: -15px;
     margin-bottom: 30px;
+}
+
+#sum-el {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.won {
+    font-style: italic;
+    font-size: 30px;
+    color: #ade8f4;
+    text-shadow: 1px 1px 0px black;
+}
+
+.lost {
+    font-style: italic;
+    font-size: 30px;
+    color: #ff3c38;
+    text-shadow: 1px 1px 0px black;
 }
