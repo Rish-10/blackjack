@@ -96,7 +96,7 @@ button {
     margin-bottom: 50px;
 }
 
-#current-stake-el {
+#current-stake-el, #sum-el {
     margin-top: -15px;
     margin-bottom: 30px;
 }

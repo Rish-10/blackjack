@@ -19,6 +19,7 @@ let stakeEl = document.querySelector("#stake-el")
 let currentStakeEl = document.querySelector("#current-stake-el")
 let gameOptions = document.getElementById("game-options")
 let startingMenu = document.getElementById("starting-menu")
+let sumEl = document.getElementById("sum-el")
 
 
 let stand = false
@@ -110,6 +111,7 @@ function resetGame() {
 
 
 function renderGame() {
+    sumEl.textContent = `Sum: ${sum}`
     if (stand === false && endGame === false) {
         for (let i = 0; i < cards.length; i++) {
             if (displayed[i] === false) {
@@ -123,6 +125,7 @@ function renderGame() {
                 displayed[i] = true
             } 
         }
+
 
         if (sum <= 20) {
             message = "HIT or STAND?"
@@ -235,9 +238,11 @@ function newCard() {
             sum += newCard
         }
         cards.push(newCard)
+        sumEl.textContent = sum
         renderGame()
     } else if (isAlive === true && hasBlackJack === false && cards.length === 5 && endGame === false) {
         stand = true
+        sumEl.textContent = sum
         renderGame()
     }
 }
