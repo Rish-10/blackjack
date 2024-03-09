@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=1.0;">
+    </head>
+    <body>
+        <h1 id="title">Rishi's Blackjack Table</h1>
+
+        <div id="table-wrapper">
+            <div id="dealer-cards">
+                <img class="card-img" id = "dealer1" src="cards/covers/red.png">
+                <img class="card-img" id = "dealer2" src="cards/covers/red.png">
+                <img class="empty" id="dealer3" src="">
+                <img class="empty" id="dealer4" src="">
+                <img class="empty" id="dealer5" src="">
+            </div>
+
+            <!-- <h1 id="dealer-el">Dealer</h1> -->
+
+            <div id="game-text">
+                <h3 id="message-el"></h3>
+
+                <div class = "disappear" id="game-options">
+                    <button onclick = "newCard()" id="hit-el">HIT 🃏</button>
+                    <button onclick = "nowStand()" id="stand-el">STAND ✋</button>
+                </div>
+
+                <div id="starting-menu">
+                    <h2 id="stake-el">Stake: $10</h2>
+                    <div id="adjust-stakes">
+                        <button onclick = "min()" id="minStake">MIN</button>
+                        <button onclick = "lowerStake()" id="lowerStake">-</button>
+                        <button onclick = "raiseStake()" id="raiseStake">+</button>
+                        <button onclick = "max()" id="maxStake">MAX</button>
+                    </div>
+                    <button onclick = "newGame()" id="new-game">NEW GAME</button>
+                </div>
+            </div>
+
+            <h1 id="player-el"></h1>
+            <p id="current-stake-el"></p>
+            <div id="player-cards">
+                <img class="card-img" id="card1-el" src="cards/covers/red.png">
+                <img class="card-img" id="card2-el" src="cards/covers/red.png">
+                <img class="empty" id="card3-el" src="">
+                <img class="empty" id="card4-el" src="">
+                <img class="empty" id="card5-el" src="">
+            </div>
+            <p id="sum-el"></p>
+        </div>
+
+
+
+        <script src="index.js"></script>
+    </body>
+</html>

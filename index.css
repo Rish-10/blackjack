@@ -1,0 +1,122 @@
+
+body {
+    margin-top: 20px;
+    text-align: center; 
+    color: white;
+    background-image: url("images/table.png");
+    background-size: cover;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #582f0e;
+}
+
+
+h1 {
+    color: goldenrod;
+}
+
+#message-el {
+    font-style: italic;
+    font-size: 30px;
+}
+
+#arrow {
+    font-style: normal;
+}
+
+#title {
+    font-size: 50px;
+    margin-top: 75px;
+}
+
+button {
+    color: #016f32; 
+    width: 100px; 
+    background: goldenrod; 
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 25px;
+    margin: 4px auto;
+    height: 30px;
+
+}
+
+.card-img {
+    width: 100px;
+    height: 150px;
+}
+
+.empty {
+    width: 0px; 
+    height: 0px; 
+}
+
+#lowerStake, #raiseStake, #minStake, #maxStake {
+    width: 40px; 
+    height: 40px;
+    font-size: 8.8px;
+    border-radius: 50%;
+    text-align: center;
+    margin-top: -30px;
+
+    
+}
+
+#adjust-stakes {
+    margin-top: 30px;
+}
+
+#stake-el {
+    font-size: 28px;
+}
+
+#new-game {
+    margin-top: 20px;
+    border-radius: 25px;
+}
+
+#player-el, #dealer-el {
+    color: white; 
+    font-size: 38px;
+}
+
+.disappear {
+    width: 0px; 
+    height: 0px; 
+    display: none;
+}
+
+#game-text {
+    margin-top: 40px; 
+    margin-bottom: 40px;
+}
+
+#table-wrapper {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#current-stake-el {
+    margin-top: -15px;
+    margin-bottom: 30px;
+}
+
+#sum-el {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.won {
+    font-style: italic;
+    font-size: 30px;
+    color: #ade8f4;
+    text-shadow: 1px 1px 0px black;
+}
+
+.lost {
+    font-style: italic;
+    font-size: 30px;
+    color: #ff3c38;
+    text-shadow: 1px 1px 0px black;
+}
