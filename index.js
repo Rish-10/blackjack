@@ -144,20 +144,25 @@ function renderGame() {
             messageEl.className = ""
             endGame = true 
             playerLoses()
-            message = "Unlucky, Dealer got Blackjack! Try again:"
+            message = "Unlucky, Dealer got BlackJack! Try again"
             messageEl.className = "lost"
 
         } else {
-
-            if (sum <= 21 && cards.length === 5) {
+            if (sum < 21 && cards.length === 5) {
                 messageEl.className = ""
                 message = "Wow, a 5-Card Charlie. You win!"
                 messageEl.className = "won"
                 endGame = true
                 playerWins()
+            } else if (sum === 21 && cards.length === 5) {
+                messageEl.className = ""
+                message = "Wow, a 5-Card Charlie and BlackJack. You win double!"
+                messageEl.className = "won"
+                endGame = true
+                playerWinsTwice()
             } else if (sum === 21) {
                 messageEl.className = "won"
-                message = "You've got Blackjack!"
+                message = "You've got BlackJack!"
                 hasBlackJack = true
                 endGame = true 
                 playerWins()
@@ -174,7 +179,7 @@ function renderGame() {
                 }
                 if (survived === false) {
                     messageEl.className = ""
-                    message = "Busted! Try again:"
+                    message = "Busted! Try again"
                     messageEl.className = "lost"
                     isAlive = false
                     endGame = true
@@ -182,6 +187,7 @@ function renderGame() {
                 } else {
                     message = "HIT OR STAND?"
                     isAlive = true
+                    renderGame()
                 }
             }
         }
@@ -204,29 +210,35 @@ function renderGame() {
         }
     
 
-        if (dealerSum === 21) {
+        if (dealerSum <= 21 && dealerCards.length === 5) {
+            messageEl.className = ""
+            message = "Unlucky, Dealer got a 5-Card Charlie. Try again"
+            messageEl.className = "lost"
+            endGame = true
+            playerLoses()
+        } else if (dealerSum === 21) {
             dealerHasBlackJack = true
             messageEl.className = ""
-            message = "Unlucky, Dealer got Blackjack! Try again:"
+            message = "Unlucky, Dealer got BlackJack! Try again"
             messageEl.className = "lost"
             endGame = true 
             playerLoses()
         } else if (dealerSum > sum && dealerSum <= 21) {
             messageEl.className = ""
-            message = "Dealer Wins! Try again:"
+            message = "Dealer Wins! Try again"
             messageEl.className = "lost"
             endGame = true
             playerLoses()
-        } else if (dealerSum === sum) {
-            messageEl.className = ""
-            message = "That's a push. Try again:"
-            messageEl.className = "lost"
-            endGame = true
-            playerTies()
         } else if (dealerSum < 17 && dealerSum < sum && dealerCards.length < 5){
             messageEl.className = ""
             message = "Dealer is now drawing. *drumroll*"
             dealerNewCard()
+        } else if (dealerSum === sum) {
+            messageEl.className = ""
+            message = "That's a push. Try again"
+            messageEl.className = "lost"
+            endGame = true
+            playerTies()
         } else {
             dealerSurvived = false
             for (let i = 0; i < dealerCards.length; i++) {
@@ -281,10 +293,6 @@ function newCard() {
             sum += newCard
         }
         cards.push(newCard)
-        sumEl.textContent = sum
-        renderGame()
-    } else if (isAlive === true && hasBlackJack === false && cards.length === 5 && endGame === false) {
-        // stand = true
         sumEl.textContent = sum
         renderGame()
     }
@@ -370,7 +378,17 @@ function playerWins() {
     player.currentStake = 0
     gameOptions.className = "disappear"
     startingMenu.className = ""
+}
 
+function playerWinsTwice() {
+    endGame = true
+    player.currentStake = player.currentStake * 4
+    player.chips += player.currentStake
+    currentStakeEl.textContent = "You just won $" + player.currentStake
+    playerEl.textContent = player.name + ": $" + player.chips
+    player.currentStake = 0
+    gameOptions.className = "disappear"
+    startingMenu.className = ""
 }
 
 function playerLoses() {
@@ -391,6 +409,8 @@ function playerLoses() {
 function playerTies() {
     endGame = true
     currentStakeEl.textContent = "Nothing is won or lost"
+    player.chips += player.currentStake
+    playerEl.textContent = player.name + ": $" + player.chips
     player.currentStake = 0 
     gameOptions.className = "disappear"
     startingMenu.className = ""
