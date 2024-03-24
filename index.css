@@ -3,11 +3,11 @@ body {
     margin-top: 20px;
     text-align: center; 
     color: white;
-    background-image: url("images/table.png");
+    /* background-image: url("images/table.png"); */
     background-size: cover;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #582f0e;
+    background-color: #1E5C3A;
 }
 
 
@@ -39,7 +39,6 @@ button {
     border-radius: 25px;
     margin: 4px auto;
     height: 30px;
-
 }
 
 .card-img {
@@ -59,7 +58,6 @@ button {
     border-radius: 50%;
     text-align: center;
     margin-top: -30px;
-
     
 }
 
@@ -117,6 +115,6 @@ button {
 .lost {
     font-style: italic;
     font-size: 30px;
-    color: #ff3c38;
+    color: #ff0f0f;
     text-shadow: 1px 1px 0px black;
 }

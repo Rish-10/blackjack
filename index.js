@@ -126,33 +126,63 @@ function renderGame() {
         }
 
 
-        if (sum <= 20) {
-            message = "HIT or STAND?"
-        } else if (sum === 21) {
-            messageEl.className = "won"
-            message = "You've got Blackjack!"
-            hasBlackJack = true
-            endGame = true 
-            playerWins()
-        } else {
-            survived = false
-            for (let i = 0; i < cards.length; i++) {
-                if (cards[i] === 1 && aceAdapt[i] == false && sum > 21) {
-                    sum = sum - 10
-                    survived = true
-                    aceAdapt[i] = true
+        if (dealerSum === 21) {
+            for (let i = 0; i < dealerCards.length; i++) {
+                if (dealerDisplayed[i] === false) {
+                    let dealerSuit = Math.floor(Math.random() * 4) + 1
+                    let dealerX = i + 1
+                    let theDealerCardElement = "dealer" + dealerX
+                    let currentDealerCard = document.getElementById(theDealerCardElement)
+                    let dealerCardImg = dealerCards[i] + ".png"
+                    currentDealerCard.className = "card-img"
+                    currentDealerCard.src = "cards/" + dealerSuit + "/" + dealerCardImg
+                    dealerDisplayed[i] = true
                 }
             }
-            if (survived === false) {
+
+            dealerHasBlackJack = true
+            messageEl.className = ""
+            endGame = true 
+            playerLoses()
+            message = "Unlucky, Dealer got Blackjack! Try again:"
+            messageEl.className = "lost"
+
+        } else {
+
+            if (sum <= 21 && cards.length === 5) {
                 messageEl.className = ""
-                message = "Busted! Try again:"
-                messageEl.className = "lost"
-                isAlive = false
+                message = "Wow, a 5-Card Charlie. You win!"
+                messageEl.className = "won"
                 endGame = true
-                playerLoses()
+                playerWins()
+            } else if (sum === 21) {
+                messageEl.className = "won"
+                message = "You've got Blackjack!"
+                hasBlackJack = true
+                endGame = true 
+                playerWins()
+            } else if (sum <= 20) {
+                message = "HIT or STAND?"
             } else {
-                message = "HIT OR STAND?"
-                isAlive = true
+                survived = false
+                for (let i = 0; i < cards.length; i++) {
+                    if (cards[i] === 1 && aceAdapt[i] == false && sum > 21) {
+                        sum = sum - 10
+                        survived = true
+                        aceAdapt[i] = true
+                    }
+                }
+                if (survived === false) {
+                    messageEl.className = ""
+                    message = "Busted! Try again:"
+                    messageEl.className = "lost"
+                    isAlive = false
+                    endGame = true
+                    playerLoses()
+                } else {
+                    message = "HIT OR STAND?"
+                    isAlive = true
+                }
             }
         }
     }
@@ -189,11 +219,11 @@ function renderGame() {
             playerLoses()
         } else if (dealerSum === sum) {
             messageEl.className = ""
-            message = "House Wins. Try again:"
+            message = "That's a push. Try again:"
             messageEl.className = "lost"
             endGame = true
-            playerLoses()
-        } else if (dealerSum < 21 && dealerSum < sum && dealerCards.length < 5){
+            playerTies()
+        } else if (dealerSum < 17 && dealerSum < sum && dealerCards.length < 5){
             messageEl.className = ""
             message = "Dealer is now drawing. *drumroll*"
             dealerNewCard()
@@ -206,7 +236,14 @@ function renderGame() {
                     dealerAceAdapt[i] = true
                 }
             }
-            if (dealerSurvived === false) {
+            if (dealerSurvived === false && sum > dealerSum) {
+                messageEl.className = ""
+                message = "You win!"
+                messageEl.className = "won"
+                dealerIsAlive = false
+                endGame = true
+                playerWins()
+            } else if (dealerSurvived === false) {
                 messageEl.className = ""
                 message = "You win! Dealer busted!"
                 messageEl.className = "won"
@@ -247,7 +284,7 @@ function newCard() {
         sumEl.textContent = sum
         renderGame()
     } else if (isAlive === true && hasBlackJack === false && cards.length === 5 && endGame === false) {
-        stand = true
+        // stand = true
         sumEl.textContent = sum
         renderGame()
     }
@@ -349,6 +386,14 @@ function playerLoses() {
         player.stake = player.chips
         stakeEl.textContent = "Stake: $" + player.stake
     }
+}
+
+function playerTies() {
+    endGame = true
+    currentStakeEl.textContent = "Nothing is won or lost"
+    player.currentStake = 0 
+    gameOptions.className = "disappear"
+    startingMenu.className = ""
 }
 
 
